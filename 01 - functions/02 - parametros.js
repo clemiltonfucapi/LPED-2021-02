@@ -1,4 +1,7 @@
 
+
+
+
 function soma(numero1, numero2){
     return numero1 + numero2
 }
@@ -8,10 +11,14 @@ console.log(  soma()  );
 console.log( soma(2));
 console.log( soma (2,3) );
 
+
+
+
 //ORDEM DOS PARAMETROS É IMPORTANTE -> ASSINATURA DA FUNCAO
 function nomeIdade(nome,idade){
     return `meu nome é ${nome} e minha idade é ${idade}`
 }
+
 
 console.log( nomeIdade("karen",20)  )
 console.log( nomeIdade(30,"fabio") )

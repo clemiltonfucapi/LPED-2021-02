@@ -284,8 +284,106 @@ console.log("Conta 2: \n"+c2.toString())
     ```
     - No código acima estamos criando duas contas c1 e c2. Depositamos 50 e 150 em c1 e c2, e depois realizamos um saque de 25 e 50.
 
-# Códig da aula do dia 23/09
+# Código da aula do dia 23/09
 - Link: https://raw.githubusercontent.com/clemiltonfucapi/LPED-2021-02/main/04%20-%20Classes/codigo_aula/ContaV2.js 
+#
+# Aula 23-09
+## Método transferePara()
+- Agora vamos implementar o método ``transferePara()``. Neste método, queremos transferir um determinado valor de uma conta para outra. Este método deve permitir a seguinte chamada:
+    ```javascript
+    let c1 = new Conta('Ricardo', 111111, 1001, 1000)
+    let c1 = new Conta('Alice', 222222, 1002, 1400)
+    //tranfere de c1 para c2 -> 200 reais
+    c1.transferePara(c2,200)
+
+    console.log(c1, 'Conta 1: \n'+c1.toString())
+    console.log(c2, 'Conta 2: \n'+c2.toString())
+    ```
+    - O método deve ter 2 parâmetros: ``conta_destino`` e ``valor``
+- A lógica para implementar esse método deve ter:
+    - Verificar se o ``valor`` é válido.
+    - Verificar se a conta que está enviando(c1), tem o valor a ser transferido
+    - Verificar se ``conta_destino`` é válido.(Opcional)
+    - Realizar o saque da conta que está enviando
+    - Realizar um depósito na ``conta_destino``
+- Vamos implementar o método ``transferePara()``:
+    ```js
+    class Conta{
+        ...
+        //parâmetros com valores padrões
+        transferePara(destino = new Conta(),valor=0){
+
+        }
+    }
+    ```
+    - Começamos colocando valores padrões nos dois parâmetros. Isso é bem útil, no parâmetro destino, pois podemos acessar os métodos da classe conta
+- Verificação das entradas
+    ```js
+        transferePara(destino = new Conta(), valor=0){
+            if(valor<=0){
+                console.log("Valor inválido!")
+                return; 
+            }
+            //caso nao tenha saldo suficiente
+            if(this.saldo < valor){
+                console.log("Não tem valor suficiente para transferir")
+                return;
+            }
+            if(destino.saldo==undefined){
+                console.log("Conta destino inválida")
+                return;
+            }
+        }
+    ```
+    - No código acima realizamos 3 verificações: 
+        - Valor inválido
+        - Valor insuficiente
+        - Conta destino inválida
+- Agora a implementação do método completo:
+    ```js
+    //parâmetros com valores padrões
+    transferePara(destino = new Conta(), valor=0){
+        if(valor<=0){
+            console.log("Valor inválido!")
+            return; 
+        }
+        //caso nao tenha saldo suficiente
+        if(this.saldo < valor){
+            console.log("Não tem valor suficiente para transferir")
+            return;
+        }
+        if(destino.saldo==undefined){
+            console.log("Conta destino inválida")
+            return;
+        }
+
+        this.saque(valor)
+        destino.deposita(valor)
+        console.log("Transferencia realizada com sucesso!")
+    }
+    ```
+    - No código acima:
+        - Realizamos o saque da conta atual (``this``)
+        - Realizamos o depósito da conta destino
+        - Imprimimos o resultado no console.
+- Fora da classe realize uma transferência:
+```js
+let c1 = new Conta('Ricardo',111111,1001,0)
+let c2 = new Conta('Alice',2323232,1111,0)
+
+c1.deposita(50)
+c2.deposita(150)
+
+c1.saque(25)
+c2.saque(50)
+
+
+c2.transferePara(c1,10)
+
+console.log( 'Conta 1: \n'+c1.toString() )
+console.log( 'Conta 2: \n'+c2.toString() )
+```
+- Ou seja, criamos duas contas, realizamos depositos, saques e uma transferência.
 
 # Referências
 - JS assíncrono: callbacks, promises e async functions: https://medium.com/@alcidesqueiroz/javascript-ass%C3%ADncrono-callbacks-promises-e-async-functions-9191b8272298

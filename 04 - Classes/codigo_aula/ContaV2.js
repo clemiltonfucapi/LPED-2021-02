@@ -1,8 +1,7 @@
 
 
-
 class Conta{
-    /* método executa quando cria um objeto */
+    /* método construtor */
     constructor(nome,cpf,agencia,saldo){
         this.nome = nome;
         this.cpf = cpf;
@@ -18,10 +17,12 @@ class Conta{
     }
     /* metodo para fazer um saque de um valor */
     saque(valor){
+        //caso nao tenha valor suficiente
         if(valor > this.saldo){
             console.log("Não tem saldo suficiente!")
             return;
         }
+        //caso valor invalido
         if( valor <= 0 ){
             console.log("Valor invalido")
             return;

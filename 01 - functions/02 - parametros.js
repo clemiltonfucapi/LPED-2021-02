@@ -1,4 +1,23 @@
 
+let pessoas = [
+    { nome: 'Joao', idade: 30, curso: 'Informatica'}, 
+    { nome: 'Maria', idade: 20 , idade: 25,curso: 'Mecatronica'},
+    { nome: 'Gilberto', idade:22, curso: 'Mecanica'}
+];
+
+transformaNegativo(1) // retorna -1
+transformaNegativo(-5) // retorna -5
+transformaNegativo(1) // retorna -1
+transformaNegativo(0.12) // retorna -0.12
+transformaNegativo("string") // retorna undefined
+
+
+
+media(6,8,7,'A') //média aritmetica: 7
+media(5,6,8,'P') // média ponderada: 6.6666
+
+
+
 
 
 

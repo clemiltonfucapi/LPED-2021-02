@@ -1,7 +1,10 @@
+
+
+
 let nomes = ['maria','jose','joao']
 
 nomes.forEach(function(x) {
-    console.log(x)
+    console.log()
 })
 
 const maiuscula = function(string){

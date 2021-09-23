@@ -285,7 +285,7 @@ console.log("Conta 2: \n"+c2.toString())
     - No código acima estamos criando duas contas c1 e c2. Depositamos 50 e 150 em c1 e c2, e depois realizamos um saque de 25 e 50.
 
 # Códig da aula do dia 23/09
-- Link:
+- Link: https://raw.githubusercontent.com/clemiltonfucapi/LPED-2021-02/main/04%20-%20Classes/codigo_aula/ContaV2.js 
 
 # Referências
 - JS assíncrono: callbacks, promises e async functions: https://medium.com/@alcidesqueiroz/javascript-ass%C3%ADncrono-callbacks-promises-e-async-functions-9191b8272298

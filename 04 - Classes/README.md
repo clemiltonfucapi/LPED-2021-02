@@ -387,13 +387,13 @@ console.log( 'Conta 2: \n'+c2.toString() )
 
 # Exercicios: 
 Crie as seguintes classes:
-1. Classe Bola: Crie uma classe que modele uma bola:
+1. Classe Bola(Bola.js): Crie uma classe que modele uma bola:
     - Atributos: Cor, tamanho(em cm), material
     - Métodos: trocaCor e mostraCor
-2. Classe Quadrado: Crie uma classe que modele um quadrado:
+2. Classe Quadrado(Quadrado.js): Crie uma classe que modele um quadrado:
     - Atributos: Tamanho do lado
     - Métodos: Mudar valor do Lado, Retornar valor do Lado e calcular Área;
-3. Classe Retangulo: Crie uma classe que modele um retangulo:
+3. Classe Retangulo(Retangulo.js): Crie uma classe que modele um retangulo:
     - Atributos: LadoA, LadoB (ou Comprimento e Largura, ou Base e Altura, a escolher)
     - Métodos: Mudar valor dos lados, Retornar valor dos lados, calcular Área e calcular Perímetro;
 ### Para cada classe crie um arquivo diferente. Neste arquivo você deve instanciar alguns objetos da classe e mostrar no console. Não se esqueça de implementar o método construtor e o método toString().

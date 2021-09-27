@@ -253,21 +253,30 @@ console.log("Conta 2: \n"+c2.toString())
     class Conta{
         ......
         /* metodo para fazer um saque de um valor */
-        saque(valor){
-            //caso nao tenha valor suficiente
-            if(valor > this.saldo){
+        saque(valorSaque){
+            //1º - caso nao tenha valor suficiente
+            if(valorSaque > this.saldo){
                 console.log("Não tem saldo suficiente!")
                 return;
             }
-            //caso valor invalido
-            if( valor <= 0 ){
-                console.log("Valor invalido")
+            //2º -  caso valorSaque  negativo
+            if( valorSaque <= 0 ){
+                console.log("Valor negativo!")
                 return;
             }
-            this.saldo -= valor;
+            //3º - caso valorSaque não seja numero
+            if(typeof(valorSaque) !='number'){
+                console.log("Valor invalido!")
+                return;
+            }
+            this.saldo -= valorSaque;
             console.log("Saque realizado com sucesso");
         }
     ```
+    - No método saque, diminuímos o saldo pelo valor do saque. Antes disso fizemos 3 verificações
+        - 1º: Caso a conta não tenha saldo o suficiente
+        - 2º: Caso o valorSaque seja um número negativo
+        - 3º: Caso o valorSaque não seja do tipo ``number``. OBS: A função ``typeof()`` retorna o tipo de dado de uma variável.
 - Fora da classe execute os seguintes comandos:
     ```js
     let c1 = new Conta('Ricardo',111111,1001,0)
@@ -316,8 +325,9 @@ console.log("Conta 2: \n"+c2.toString())
         }
     }
     ```
-    - Começamos colocando valores padrões nos dois parâmetros. Isso é bem útil, no parâmetro destino, pois podemos acessar os métodos da classe conta
-- Verificação das entradas
+    - Começamos colocando valores padrões nos dois parâmetros. Isso é bem útil, no parâmetro destino, pois podemos acessar os métodos da classe conta. 
+    - Não se esqueça que ao colocar valor padrão em um parâmetro, não substitui o valor que foi enviado pela chamada do método. Esse valor será usado SOMENTE se não for enviado nenhum valor(undefined)
+- Agora vamos fazer a verificação das entradas
     ```js
         transferePara(destino = new Conta(), valor=0){
             if(valor<=0){
@@ -329,16 +339,17 @@ console.log("Conta 2: \n"+c2.toString())
                 console.log("Não tem valor suficiente para transferir")
                 return;
             }
-            if(destino.saldo==undefined){
-                console.log("Conta destino inválida")
+            //verificar se contaDestino é conta
+            if( (contaDestino instanceof Conta) == false  ){
+                console.log("Conta inválida!")
                 return;
             }
         }
     ```
     - No código acima realizamos 3 verificações: 
-        - Valor inválido
+        - Valor inválido 
         - Valor insuficiente
-        - Conta destino inválida
+        - Caso ``contaDestino`` é um instância da classe ``Conta``. Para isso utilizamos o operador ``instanceof``
 - Agora a implementação do método completo:
     ```js
     //parâmetros com valores padrões
@@ -352,11 +363,11 @@ console.log("Conta 2: \n"+c2.toString())
             console.log("Não tem valor suficiente para transferir")
             return;
         }
-        if(destino.saldo==undefined){
-            console.log("Conta destino inválida")
-            return;
+        if( (contaDestino instanceof Conta) == false  ){
+                console.log("Conta inválida!")
+                return;
         }
-
+        //fazer transferencia
         this.saque(valor)
         destino.deposita(valor)
         console.log("Transferencia realizada com sucesso!")

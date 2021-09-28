@@ -47,6 +47,8 @@ class Retangulo{
 let r1 = new Retangulo(3,6);
 let r2 = new Retangulo(4,9);
 
+
+
 console.log(r1)
 r2.setLadoB(10)
 console.log(r2);

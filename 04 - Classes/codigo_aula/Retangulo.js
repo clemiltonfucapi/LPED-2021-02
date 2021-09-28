@@ -1,5 +1,6 @@
 
-class Retangulo{
+
+export class Retangulo{
     /* atributos privados - não podem ser acessados fora da classe 
     ENCAPSULAMENTO: 
         - Atributos são privados
@@ -15,12 +16,22 @@ class Retangulo{
         this.#ladoA = ladoA;
         this.#ladoB = ladoB
     }
-
+    /* Métodos especiais: getters e setter 
+        Servem para manipular os atributos privado;
+        GET: retorna um valor de um atributo
+        SET: modifica o valor de um atriubuto
+    */
     get ladoA(){
+        console.log('método get')
         return this.#ladoA
     }
     set ladoA(novoLado){
+        //aux -> armazena lado antigo
+        let aux = this.#ladoA;
+        // troca p/ novo lado
         this.#ladoA = novoLado
+
+        console.log(`Trocou o ladoA de ${aux}  para ${this.#ladoA}`)
     }
 
     get ladoB(){
@@ -28,18 +39,12 @@ class Retangulo{
     }
 
     set ladoB(novoLado){
-        this.#ladoB  = novoLado; 
+        let aux = this.#ladoB;
+        this.#ladoB  = novoLado;
+        console.log(`Trocou ladoB de ${aux} para ${this.#ladoB}`) 
     }
 
 
 }
 
-let r1 = new Retangulo(2,3)
-//chamando set ladoA
-r1.ladoA = 3;
 
-console.log(r1)
-
-console.log(Retangulo.nome)
-// chamando get ladoB
-console.log(r1.ladoB)

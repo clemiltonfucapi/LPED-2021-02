@@ -19,32 +19,39 @@
     ```js
     export class Pessoa {
         #nome;
-        #cpf
-
-        constructor(nome,cpf ){
+        #cpf;
+        constructor(nome,cpf){
             this.#nome = nome;
-            this.#cpf = cpf
+            this.#cpf = cpf;
         }
-
         get nome(){
             return this.#nome;
         }
-
         set nome(nome){
-            this.#nome = nome;;
+            this.#nome = nome;
         }
-
+        get cpf(){
+            return this.#cpf;
+        }
+        set cpf(cpf){
+            this.#cpf  =cpf;
+        }
         get toString(){
-            return  `Pessoa { `+
-            `Nome: ${this.nome}`+ `,CPF: ${this.#cpf} } \n`;
+            return `Pessoa {`+
+                    `Nome: ${this.#nome}, CPF: ${this.#cpf} }`;
         }
-
-    }
+    }  
     ```
     - Nesta classe criamos:
         -  atributos privados: #nome  e #cpf
-        - get e set do atributos nome
+        - get e set do atributos nome e cpf
         - get toString(): para retornar os dados do objeto.
+- Exportamos a classe como módulos. Para o node.js entender isso, devemos criar um arquivo na mesma pasta com o nome ``package.json`` com o código:
+    ```js
+    {
+        "type":"module"
+    }
+    ```
 - Crie um arquivo chamado ``index.js``:
     ```js
     import {Pessoa} from './Pessoa.js'
@@ -73,17 +80,17 @@ export class Funcionario extends Pessoa{
     }
 }
 ```
-- Primeiro perceba que importamos a classe ``Pessoa`` dentro do arquivo da classe ``Funcionario``. Trabalhando com módulos isso é possível, sem se preocupar com a ordem de chamada dos arquivos:
+- Primeiro importamos a classe ``Pessoa`` dentro do arquivo da classe ``Funcionario``. Isso é possível, pois exportamos a classe pessoa como módulo:
     ```javascript
     import { Pessoa } from "./Pessoa.js";
     ```
-- Depois utilizamos a palavra **extends** para dizer que Funcionário é SUBCLASSE de Pessoa:
+-  A palavra **extends**, neste caso, indica que a classe ``Funcionario`` é filha da classe ``Pessoa``s:
     ```javascript
     export class Funcionario extends Pessoa{
         #salario
     }
     ```
-    - Isto faz com que TODOS os atributos e métodos de ``Pessoa``, passem para a classe ``Funcionário``
+    - Ou seja, TODOS os atributos e métodos de ``Pessoa``, passem para a classe ``Funcionário``
     - O atributo ``salario`` será somente da classe funcionário
 - Método construtor: 
     ```javascript
@@ -113,42 +120,14 @@ export class Funcionario extends Pessoa{
 - Implementação ``toString()``:
 ```js
 export class Funcionario extends Pessoa
+    //z
     get toString(){
-        return `Funcionário { `+
-              `nome: ${this.#nome}, `+
-              `cpf: ${this.#cpf}, `
-              `salario: ${this.#salario} }\n`;
+        return `Funcionario {`+ 
+                `nome: ${this.nome}, `+
+                `cpf: ${this.cpf}, `+
+                `salario: ${this.#salario}  }\n`
     }
 ```
-
-- Ao executar ``index.js``:
-    - ![Images](imgs/shell04.png)
-    - Isto aconteceu pois estamos tentando acessar o atributo ``this.#nome``, porém este atributo é PRIVADO da classe Pessoa. Lembrando, atributos privados podem ser acessados somente dentro da própria classe. 
-        - OBS: Outras linguagens tem o atributo do tipo ``protected`` onde os atributos são acessíveis na sua subclasse
-    - Então como acessamos os valores dos atributos da classe pai? ** R= getters e setters **
-- Volte a classe ``Pessoa.js`` e implemente o get e o set do atributo cpf:
-    ```js
-    export class Pessoa {
-        ...
-        get cpf(){
-            return this.#cpf;
-        }
-        set cpf(cpf){
-            this.#cpf = cpf;
-        }
-    }
-    ```
-- Refatore o método ``toString()`` em ``Funcionario.js``:
-    ```js
-    export class Funcionario extends Pessoa{
-        get toString(){
-            return `Funcionário { `+
-                `nome: ${this.nome}, `+
-                `cpf: ${this.cpf}, `
-                `salario: ${this.#salario} }\n`;
-        }
-    ```
-    - OBS: ``this.nome`` e ``this.cpf`` são os métodos *get* da classe ``Pessoa``
 - Obtemos como saída em ``index.js``:
     - ![Images](imgs/shell05.png)
     - Dessa vez, conseguimos ver os atributos da classe funcionário.
@@ -160,7 +139,7 @@ export class Funcionario extends Pessoa
             return `Funcionario { `+
                     //acessando toString da classe Pessoa
                     `${super.toString}, `+
-                    `salario: ${this.#salario} }\n`;
+                    `salario: ${this.#salario} }`;
         }
     }
     ```
@@ -213,12 +192,14 @@ export class Funcionario extends Pessoa{
 
         get toString(){
             return `Vendedor { `+
-                    `${super.toString}, `+
+                    `${super.toString2}, `+
                     `totalVendas: ${this.#totalVendas}`
         }
     }
     ```
     - Criamos uma classe ``Vendedor`` que herda de ``Funcionario``. Tem o atributo ``totalVendas`` que será utilizado para realizar um cálculo diferenciado do salário.  
+- Crie uma pasta chamada ``models/`` e coloque todos os arquivos de classes dentro desta pasta:
+    - ![Images](imgs/img01.png)
 - Em ``index.js``:
     ```js
     import { Funcionario } from './classes/Funcionario.js';
@@ -236,6 +217,40 @@ export class Funcionario extends Pessoa{
     console.log(v.toString);
     ```
     - Saída no console: ![Images](imgs/shell06.png)
+    - Ou seja,o ``toString()`` da classe ``Vendedor`` está sendo executado
 
+- Agora vamos implementar um método chamado calculaSalario na classe vendedor. A ideia é que o salário do vendedor, seja calculado pela quantidade de vendas:
+    ```javascript
+    export class Vendedor extends Funcionario {
+        .....
 
+        get calculaSalario(){
+            // salario = salario + 1% das vendas
+            return this.salario + this.#totalVendas*0.01
+        }
+    }
+    ```
+    - O método soma o salário com 1% do total de vendas.
+- Modifique ``index.js`` para:
+```js
+simport { Funcionario } from "./model/Funcionario.js";
+import { Pessoa } from "./model/Pessoa.js";
+import { Vendedor } from "./model/Vendedor.js";
+
+let p = new Pessoa("clemilton","2321321");
+console.log(p.toString)
+
+let f = new Funcionario("Lia","23232",3000);
+console.log(f.toString);
+console.log(f.toString2)
+
+let v = new Vendedor("Kennedy","1111",5000);
+v.totalVendas = 20000;
+
+console.log(v.toString)
+console.log(v.calculaSalario)
+```
+- E obtemos como saída:
+    - ![Images](imgs/shell07.png)
+    - Criamos um vendedor com salario 5000, e total de vendas 20000. O calculo do salario do vendedor é feito pelo método calculaSalario.
 # Continua ...

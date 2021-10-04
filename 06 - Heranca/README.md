@@ -253,4 +253,8 @@ console.log(v.calculaSalario)
 - E obtemos como saída:
     - ![Images](imgs/shell07.png)
     - Criamos um vendedor com salario 5000, e total de vendas 20000. O calculo do salario do vendedor é feito pelo método calculaSalario.
-# Continua ...
+
+# Código aula 01-10
+- https://github.com/clemiltonfucapi/LPED-2021-02/raw/main/06%20-%20Heranca/codigo_aula/aula-01-10.zip
+
+#

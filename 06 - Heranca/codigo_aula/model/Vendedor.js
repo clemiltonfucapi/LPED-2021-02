@@ -4,9 +4,13 @@ import { Funcionario } from "./Funcionario.js";
 
 export class Vendedor extends Funcionario{
     #totalVendas;
-
-    constructor(nome,cpf,salario){
-        super(nome,cpf,salario); // construtor de Funcionario
+    /* PERCENTUAL é um atributo
+    - é publico
+    - estático: Todos os objetos compartilham o mesmo valor
+    */
+    static PERCENTUAL = 0.01; 
+    constructor(nome,cpf,salarioBase){
+        super(nome,cpf,salarioBase); // construtor de Funcionario
         this.#totalVendas = 0;
     }
 
@@ -20,8 +24,12 @@ export class Vendedor extends Funcionario{
         return `Vendedor { ${super.toString2 }},`+
                         ` totalVendas: ${this.#totalVendas}`
     }
-    get calculaSalario(){
-        return this.salario + this.#totalVendas*0.01;
+    get salarioTotal(){
+        return this.salario + this.adicional();
+    }
+
+    adicional(){
+        return this.#totalVendas*Vendedor.PERCENTUAL;
     }
     
 }

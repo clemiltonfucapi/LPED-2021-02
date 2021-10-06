@@ -29,11 +29,11 @@ while(1){
     
     }else if(op==5){
         // selecionando o indice do gerente
-        let opcaoGerente = selecionaVendedor("Atualizar vendedor: \n");
+        let opcaoVendedor = selecionaVendedor("Atualizar vendedor: \n");
 
-        let vendedor = Gerente.LISTA[opcaoGerente]
+        let vendedor = Vendedor.LISTA[opcaoVendedor]
         // adicionar um vendedor ao gerente.....
-        vendedor.atualizar(opcaoGerente);        
+        vendedor.atualizar(opcaoVendedor);        
     }else if(op==6){
         // selecionando o indice do gerente
         let opcaoGerente = selecionaGerente("Atualizar gerente: ");

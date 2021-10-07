@@ -7,7 +7,12 @@ import { Vendedor } from "./Vendedor.js";
 export class Gerente extends Funcionario { 
     // é um array -> pode ser de qualquer tipo
     #listaVendedores;
-    static LISTA=[];
+
+    static LISTA=[
+        new Gerente("aaa","bbb",2000),
+        new Gerente("bbb","22222",3000)
+
+    ];
 
     constructor(nome,cpf,salario){
         super(nome,cpf,salario);
